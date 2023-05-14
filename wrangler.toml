@@ -1,0 +1,7 @@
+name = "cloudflare-worker-test"
+main = "src/index.ts"
+compatibility_date = "2023-05-14"
+node_compat = true
+
+[build]
+command = "npm run build"
