@@ -29,20 +29,16 @@ function add(a: number, b: number): number {
   return a + b;
 }
 
-// async function tigrisMain() {}
-
 async function tigrisMain() {
 	const tigrisClient = new Tigris();
-	// await tigrisClient.getDatabase().initializeBranch();
-	// 	await tigrisClient.registerSchemas([Catalog]);
+	await tigrisClient.getDatabase().initializeBranch();
+	await tigrisClient.registerSchemas([Catalog]);
 
-	// 	const db = tigrisClient.getDatabase();
-	// 	const collection = db.getCollection<Catalog>(Catalog);
-	// 	const cursor = collection.findMany();
-	// 	const results = await cursor.toArray();
-	// }
-
-	// async function handleRequest(request: Request): Promise<Response> {
+	const db = tigrisClient.getDatabase();
+	const collection = db.getCollection<Catalog>(Catalog);
+	const cursor = collection.findMany();
+	const results = await cursor.toArray();
+	return results.length;
 }
 
 
@@ -52,10 +48,9 @@ export default {
 		env: Env,
 		ctx: ExecutionContext
 	): Promise<Response> {
-		return new Response("Hello World!");
-		// Call the `add` function
-		const result = add(5, 3);
-		// const result = await tigrisMain();
+		// return new Response("Hello World!");
+		// const result = add(5, 3);
+		const result = tigrisMain();
 
 		// Create a response with the result
 		const response = new Response(`The result of addition is ${result}`, {
